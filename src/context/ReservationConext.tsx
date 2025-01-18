@@ -1,27 +1,71 @@
-// import React, { useState } from 'react'
-// import { createContext } from 'vm'
+"use client";
+import React, { createContext, useContext, useEffect } from "react";
+import { useApi } from "@/hooks/useApi";
+import { ReservationTypes } from "@/types/ReservationType";
+import { FormData } from "@/types/FormType";
 
-// interface ChildrenType {
-//     children: React.ReactNode
-// }
+// Tipo para los children del proveedor
+interface ChildrenType {
+  children: React.ReactNode;
+}
 
-// interface ContextTypes {
-    
-// }
+// Tipo para el contexto
+interface ContextTypes {
+  reservations: ReservationTypes[];
+  setReservations: React.Dispatch<React.SetStateAction<ReservationTypes[]>>;
+  loading: boolean;
+  error: boolean;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  usePOST: () => Promise<void>;
+  loadDataFetch: () => Promise<void>;
+}
 
+const ReservationContext = createContext<ContextTypes | undefined>(undefined);
 
-// interface
+function ReservationContextProvider({ children }: ChildrenType) {
+  const {
+    reservations,
+    setReservations,
+    loading,
+    error,
+    formData,
+    setFormData,
+    usePOST,
+    loadDataFetch,
+  } = useApi();
 
-// const createReservationContext = createContext()
+  useEffect(() => {
+    loadDataFetch(); // Cargar reservas al iniciar
+  }, [loadDataFetch]);
 
-// function ReservationConextProvider({children}:ChildrenType) {
-//     const [reservations, setReservations] = useState([])
-  
-//     return (
-//     <>
-//         {children}
-//     </>
-//   )
-// }
+  const value: ContextTypes = {
+    reservations,
+    setReservations,
+    loading,
+    error,
+    formData,
+    setFormData,
+    usePOST,
+    loadDataFetch,
+  };
 
-// export default ReservationConextProvider
+  return (
+    <ReservationContext.Provider value={value}>
+      {children}
+    </ReservationContext.Provider>
+  );
+}
+
+// Hook para usar el contexto
+export const useReservationContext = () => {
+  const context = useContext(ReservationContext);
+  if (context === undefined) {
+    throw new Error(
+      "useReservationContext debe ser usado dentro de ReservationContextProvider"
+    );
+  }
+  return context;
+};
+
+export default ReservationContextProvider;

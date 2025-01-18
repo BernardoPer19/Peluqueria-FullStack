@@ -1,48 +1,41 @@
-import React from "react";
+"use client";
 
-
-const loadReservations  = async () => {
-    const res = await fetch("http://localhost:3000/api/reservations/")
-    const data = await res.json()
-    return data
-}
-
-
+import { useApi } from "@/hooks/useApi";
+import React, { useEffect } from "react";
+import { useReservationContext } from "@/context/ReservationConext";
+import ReservationUserCard from "./ReservationUserCard";
 
 function ReservationUserList() {
+  const { loading, error } = useReservationContext();
 
-    const reservations = loadReservations()
+ 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-100 to-blue-300">
+        <p className="text-2xl font-semibold text-blue-600 animate-pulse">
+          Cargando reservas...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-red-100">
+        <p className="text-2xl font-semibold text-red-600">
+          Error al cargar las reservas.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="m-auto max-w-[1280px]">
-      <h1>ReservationList</h1>
+    <div className="">
+      <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
+        Lista de Reservas
+      </h1>
 
-      <div className="flex gap-7 w-[90%] p-5 flex-col">
-        <div className="flex gap-5 bg-blue-300 px-7 py-7 w-full items-center justify-between">
-          <p>name</p>
-          <p>lastnamne</p>
-          <p>cut type</p>
-          <p>plan</p>
-          <span>confirmado</span>
-        </div>
-
-        <div className="w-full flex justify-between items-center gap-5 px-7 py-7 bg-red-700">
-          <p>jakini</p>
-          <p>peredow</p>
-          <p>midle part</p>
-          <p>ORO</p>
-          <span>confirmado</span>
-        </div>
-        
-        <div className="w-full flex justify-between items-center gap-5 px-7 py-7 bg-red-700">
-          <p>joe</p>
-          <p>roman</p>
-          <p>tijeras</p>
-          <p>PLATA</p>
-          <span>pendiente</span>
-        </div>
-      </div>
-   
+      <ReservationUserCard />
     </div>
   );
 }
