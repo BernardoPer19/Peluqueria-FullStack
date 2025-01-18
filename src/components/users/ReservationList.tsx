@@ -8,7 +8,6 @@ import ReservationUserCard from "./ReservationUserCard";
 function ReservationUserList() {
   const { loading, error } = useReservationContext();
 
- 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-100 to-blue-300">

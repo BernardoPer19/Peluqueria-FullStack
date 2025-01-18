@@ -69,7 +69,7 @@ const UserForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md"
+      className="max-w-4xl w-[800px] mx-auto p-6 bg-white rounded-lg shadow-md"
     >
       <h2 className="text-2xl font-bold mb-6 text-center">Formulario de Reserva</h2>
 
@@ -154,9 +154,9 @@ const UserForm = () => {
           className={`border rounded-lg p-3 ${errors.plan ? "border-red-500" : "border-gray-300"}`}
         >
           <option value="">Seleccione...</option>
-          <option value="Bronce">Bronce</option>
-          <option value="Plata">Plata</option>
-          <option value="Oro">Oro</option>
+          <option value="BRONCE">Bronce</option>
+          <option value="PLATA">Plata</option>
+          <option value="ORO">Oro</option>
         </select>
         {errors.plan && (
           <p className="text-red-500 text-sm mt-1">{errors.plan}</p>

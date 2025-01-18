@@ -5,7 +5,7 @@ import React from "react";
 function UserPage() {
   return (
     <main className="min-h-screen bg-gradient-to-r from-gray-100 to-gray-200 p-8 flex flex-col gap-10">
-      {/* <UserForm/> */}
+      <UserForm/>
       <ReservationUserList />
     </main>
   );

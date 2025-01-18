@@ -1,8 +1,9 @@
 "use client";
 import React, { createContext, useContext, useEffect } from "react";
 import { useApi } from "@/hooks/useApi";
-import { ReservationTypes } from "@/types/ReservationType";
+
 import { FormData } from "@/types/FormType";
+import { ReservationTypesDB } from "@/types/ReservationType";
 
 // Tipo para los children del proveedor
 interface ChildrenType {
@@ -11,8 +12,8 @@ interface ChildrenType {
 
 // Tipo para el contexto
 interface ContextTypes {
-  reservations: ReservationTypes[];
-  setReservations: React.Dispatch<React.SetStateAction<ReservationTypes[]>>;
+  reservations: ReservationTypesDB[];
+  setReservations: React.Dispatch<React.SetStateAction<ReservationTypesDB[]>>;
   loading: boolean;
   error: boolean;
   formData: FormData;

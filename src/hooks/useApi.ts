@@ -35,7 +35,6 @@ export const useApi = () => {
     }
   }, []); 
 
-  // Función POST
   const usePOST = async () => {
     try {
       const newReservation = {
