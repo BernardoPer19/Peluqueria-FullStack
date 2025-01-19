@@ -19,7 +19,7 @@ export const PUT = async (request: Request, { params }: Params) => {
       );
     }
 
-    // Verifica si la reserva existe
+
     const existingReservation = await prisma.reserva.findUnique({
       where: { 
         id: Number(params.id) 
