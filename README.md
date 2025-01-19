@@ -1,3 +1,17 @@
+**En desarrollo**
+
+ 17/01/2025: Primera fase de la web, añadiendo la base de datos en SQlite, y funciones estas funciones de la api: get, post. 
+ 19/01/2024:Segunda fase de la web, web acabada en el backend, API total mente funcional, GET,POST, DELETE Y PUT, se añadio la 
+ admin-page para q el administrador de la pagina web acepte o rechaze las solicitudes.
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
