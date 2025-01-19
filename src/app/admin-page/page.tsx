@@ -1,8 +1,12 @@
+"use client"
+import AdminReservationsList from '@/components/admin/AdminList'
 import React from 'react'
 
 function AdminPage() {
   return (
-    <div>AdminPage</div>
+    <div>
+      <AdminReservationsList/>
+    </div>
   )
 }
 

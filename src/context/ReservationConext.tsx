@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect } from "react";
 import { useApi } from "@/hooks/useApi";
 
 import { FormData } from "@/types/FormType";
-import { ReservationTypesDB } from "@/types/ReservationType";
+import { ReservationTypesDB, UpdateRes } from "@/types/ReservationType";
 
 // Tipo para los children del proveedor
 interface ChildrenType {
@@ -20,6 +20,11 @@ interface ContextTypes {
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   usePOST: () => Promise<void>;
   loadDataFetch: () => Promise<void>;
+  usePUT: (
+    id: number,
+    reservation: UpdateRes
+  ) => Promise<void>;
+  useDELETE: (id: number) => Promise<void>;
 }
 
 const ReservationContext = createContext<ContextTypes | undefined>(undefined);
@@ -34,6 +39,8 @@ function ReservationContextProvider({ children }: ChildrenType) {
     setFormData,
     usePOST,
     loadDataFetch,
+    useDELETE,
+    usePUT,
   } = useApi();
 
   useEffect(() => {
@@ -49,6 +56,8 @@ function ReservationContextProvider({ children }: ChildrenType) {
     setFormData,
     usePOST,
     loadDataFetch,
+    useDELETE,
+    usePUT,
   };
 
   return (

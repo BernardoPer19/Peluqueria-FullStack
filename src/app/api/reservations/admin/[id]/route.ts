@@ -9,47 +9,44 @@ export interface Params {
 //     const ReservationByID = prisma.reserva.findFirst()
 // }
 
-export const DELETE = async (req: Request, { params }: Params) => {
-    try {
-      const { id } = params;  // Aquí extraemos el ID de los params
+// export const DELETE = async (req: Request, { params }: Params) => {
+//     try {
+//       const { id } = params;  // Aquí extraemos el ID de los params
       
-      if (!id || isNaN(Number(id))) {
-        return NextResponse.json(
-          { error: "El ID de la reserva debe ser un número válido." },
-          { status: 400 }
-        );
-      }
+//       if (!id || isNaN(Number(id))) {
+//         return NextResponse.json(
+//           { error: "El ID de la reserva debe ser un número válido." },
+//           { status: 400 }
+//         );
+//       }
   
-      const deleteReservation = await prisma.reserva.delete({
-        where: { id: Number(id) },
-      });
+//       const deleteReservation = await prisma.reserva.delete({
+//         where: { id: Number(id) },
+//       });
   
-      return NextResponse.json(deleteReservation);
+//       return NextResponse.json(deleteReservation);
   
-    } catch (error: any) {
-      console.error("Error al eliminar la reserva:", error);
+//     } catch (error: any) {
+//       console.error("Error al eliminar la reserva:", error);
       
-      if (error.code === "P2025") {
-        return NextResponse.json(
-          { error: "La reserva con el ID proporcionado no existe." },
-          { status: 404 }
-        );
-      }
+//       if (error.code === "P2025") {
+//         return NextResponse.json(
+//           { error: "La reserva con el ID proporcionado no existe." },
+//           { status: 404 }
+//         );
+//       }
   
-      return NextResponse.json(
-        { error: `Error al eliminar la reserva: ${error.message}` },
-        { status: 500 }
-      );
-    }
-  };
+//       return NextResponse.json(
+//         { error: `Error al eliminar la reserva: ${error.message}` },
+//         { status: 500 }
+//       );
+//     }
+//   };
   
-
 export const PUT = async (request: Request, { params }: Params) => {
   try {
-    const { id } = params;
     const { horarioInicio, horarioFin, estado } = await request.json();
 
-    // Validaciones básicas
     if (!horarioInicio || !horarioFin || !estado) {
       return NextResponse.json(
         {
@@ -59,11 +56,22 @@ export const PUT = async (request: Request, { params }: Params) => {
       );
     }
 
-    // Actualización en la base de datos
-    const editUser = await prisma.reserva.update({
-      where: {
-        id: Number(id),
+    // Verifica si la reserva existe
+    const existingReservation = await prisma.reserva.findUnique({
+      where: { 
+        id: Number(params.id) 
       },
+    });
+
+    if (!existingReservation) {
+      return NextResponse.json(
+        { error: "Reserva no encontrada" },
+        { status: 404 }
+      );
+    }
+
+    const editUser = await prisma.reserva.update({
+      where: { id: Number(params.id) },
       data: {
         estado,
         horarioInicio: new Date(horarioInicio),

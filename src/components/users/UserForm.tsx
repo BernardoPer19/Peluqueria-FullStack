@@ -44,27 +44,35 @@ const UserForm = () => {
     return Object.values(formErrors).every((error) => error === "");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (validate()) {
       console.log("Formulario enviado:", formData);
       
-      const createdReservation  = usePOST()
-
-      setReservations((prevRes) => [...prevRes, createdReservation])
-
-      setFormData({
-        nombreCliente: "",
-        apellidoCliente: "",
-        descripcion: "",
-        tipoCorte: "",
-        plan: "",
-      });
+      try {
+        // Esperamos a que se resuelva la promesa
+        const createdReservation = await usePOST();
+        
+        // Agregamos la nueva reserva al estado
+        setReservations((prevRes) => [...prevRes, createdReservation]);
+  
+        // Limpiamos el formulario
+        setFormData({
+          nombreCliente: "",
+          apellidoCliente: "",
+          descripcion: "",
+          tipoCorte: "",
+          plan: "",
+        });
+      } catch (error) {
+        console.error("Error al crear la reserva:", error);
+      }
     } else {
       console.log("Errores en el formulario");
     }
   };
+  
 
   return (
     <form
