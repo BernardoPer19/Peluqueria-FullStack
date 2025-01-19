@@ -22,7 +22,7 @@ const UserForm = () => {
   const validate = () => {
     let formErrors = { ...errors };
 
-    // Validación de campos
+   
     if (!formData.nombreCliente) formErrors.nombreCliente = "El nombre es obligatorio";
     else formErrors.nombreCliente = "";
 
@@ -40,7 +40,7 @@ const UserForm = () => {
 
     setErrors(formErrors);
 
-    // Retornar verdadero si no hay errores
+
     return Object.values(formErrors).every((error) => error === "");
   };
 
@@ -81,7 +81,7 @@ const UserForm = () => {
     >
       <h2 className="text-2xl font-bold mb-6 text-center">Formulario de Reserva</h2>
 
-      {/* Datos Personales */}
+  
       <div className="grid grid-cols-2 gap-6 mb-6">
         <div className="flex flex-col">
           <label htmlFor="nombreCliente" className="font-medium mb-2">Nombre</label>
@@ -114,7 +114,7 @@ const UserForm = () => {
         </div>
       </div>
 
-      {/* Detalles del Servicio */}
+   
       <div className="grid grid-cols-2 gap-6 mb-6">
         <div className="flex flex-col">
           <label htmlFor="descripcion" className="font-medium mb-2">Descripción</label>
@@ -151,7 +151,6 @@ const UserForm = () => {
         </div>
       </div>
 
-      {/* Plan */}
       <div className="mb-6">
         <label htmlFor="plan" className="font-medium mb-2">Plan</label>
         <select
@@ -171,7 +170,7 @@ const UserForm = () => {
         )}
       </div>
 
-      {/* Botón de envío */}
+    
       <button
         type="submit"
         className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition"

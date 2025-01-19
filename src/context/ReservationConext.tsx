@@ -44,7 +44,7 @@ function ReservationContextProvider({ children }: ChildrenType) {
   } = useApi();
 
   useEffect(() => {
-    loadDataFetch(); // Cargar reservas al iniciar
+    loadDataFetch(); 
   }, [loadDataFetch]);
 
   const value: ContextTypes = {
@@ -67,7 +67,7 @@ function ReservationContextProvider({ children }: ChildrenType) {
   );
 }
 
-// Hook para usar el contexto
+
 export const useReservationContext = () => {
   const context = useContext(ReservationContext);
   if (context === undefined) {

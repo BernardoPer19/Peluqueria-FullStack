@@ -1,4 +1,4 @@
-// Tipos Enum
+
 export enum Plan {
   BRONCE = "BRONCE",
   PLATA = "PLATA",
@@ -11,14 +11,14 @@ export enum Estado {
   RECHAZADO = "RECHAZADO",
 }
 
-// Tipo para la Reserva
+
 export interface ReservationTypesDB {
-  id: number; // Prisma usa Int para ID
+  id: number; 
   nombreCliente: string;
   apellidoCliente: string;
   descripcion: string;
-  tipoCorte: string; // Esto puede ser un enum o string específico si tienes opciones predefinidas
-  plan: Plan; // Enum Plan
+  tipoCorte: string;
+  plan: Plan; 
   estado: Estado;
   horarioInicio?: Date | string; 
   horarioFin?: Date | string; 
