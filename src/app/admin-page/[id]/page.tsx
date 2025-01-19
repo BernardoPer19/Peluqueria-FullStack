@@ -10,7 +10,7 @@ function ReservationDetails() {
   const { id } = useParams();
   const reservation = reservations.find((res) => res.id.toString() === id);
 
-  // Estados locales para manejar los inputs
+
   const [estado, setEstado] = useState(reservation?.estado || "");
   const [horarioInicio, setHorarioInicio] = useState(
     reservation?.horarioInicio || ""
@@ -27,7 +27,7 @@ function ReservationDetails() {
     );
   }
 
-  // Función para manejar la actualización
+  
   const handleUpdate = async () => {
     try {
       const updateData = {
