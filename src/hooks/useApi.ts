@@ -24,8 +24,8 @@ export const useApi = () => {
         throw new Error(`Error del servidor: ${res.status}`);
       }
 
-      const text = await res.text(); // Usamos text() en vez de json() directamente
-      const data = text ? JSON.parse(text) : []; // Verificamos que no sea vacío
+      const text = await res.text(); 
+      const data = text ? JSON.parse(text) : []; 
       setReservations(data);
       setError(false);
     } catch (error) {
@@ -59,7 +59,7 @@ export const useApi = () => {
       }
 
       const text = await response.text();
-      const data = text ? JSON.parse(text) : {}; // Verificamos que no sea vacío
+      const data = text ? JSON.parse(text) : {}; 
       setReservations((prev) => [...prev, data]);
       return data;
     } catch (error) {
@@ -83,7 +83,7 @@ export const useApi = () => {
       }
 
       const text = await res.text();
-      const data = text ? JSON.parse(text) : {}; // Verificamos que no sea vacío
+      const data = text ? JSON.parse(text) : {}; 
       setReservations((prev) => prev.filter((res) => res.id !== id));
       return data;
     } catch (error) {
