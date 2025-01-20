@@ -1,9 +1,11 @@
-import Image from "next/image";
+import Header from "@/sections/Header";
+import ServicesP from "@/sections/ServicesP";
 
 export default function Home() {
   return (
   <>
-    <h1>Peluqeuria page</h1>
+    <Header/>
+    <ServicesP/>
   </>
   );
 }
