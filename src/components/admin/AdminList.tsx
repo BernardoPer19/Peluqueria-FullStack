@@ -4,9 +4,7 @@ import React, { useState } from "react";
 
 const AdminReservationsList = () => {
   const { reservations, useDELETE } = useReservationContext();
-  const [fechas, setFechas] = useState<{
-    [id: number]: { horarioInicio: string; horarioFin: string };
-  }>({});
+ 
 
   const handleDelete = async (id: number) => {
     const confirmDelete = window.confirm(
@@ -23,19 +21,6 @@ const AdminReservationsList = () => {
     }
   };
 
-  const handleDateChange = (
-    id: number,
-    field: "inicio" | "fin",
-    value: string
-  ) => {
-    setFechas((prev) => ({
-      ...prev,
-      [id]: {
-        ...prev[id],
-        [field === "inicio" ? "horarioInicio" : "horarioFin"]: value,
-      },
-    }));
-  };
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -61,33 +46,6 @@ const AdminReservationsList = () => {
             <p className="text-gray-600 mb-4">
               <strong>Descripción:</strong> {reservation.descripcion}
             </p>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">
-                Fecha de inicio
-              </label>
-              <input
-                type="datetime-local"
-                value={fechas[reservation.id]?.horarioInicio || ""}
-                onChange={(e) =>
-                  handleDateChange(reservation.id, "inicio", e.target.value)
-                }
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">
-                Fecha de fin
-              </label>
-              <input
-                type="datetime-local"
-                value={fechas[reservation.id]?.horarioFin || ""}
-                onChange={(e) =>
-                  handleDateChange(reservation.id, "fin", e.target.value)
-                }
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-            </div>
 
             <div className="flex justify-between items-center">
               <Link href={`/admin-page/${reservation.id}`}>
